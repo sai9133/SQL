@@ -1,0 +1,28 @@
+Q) WAQTD ename,managers name,manager's manager names,along with their dnames.If employee earning morethan 1000.And managers earns morethan  Allens.And Manager's manager working in NEW YORK OR CHICAGO...?
+
+  1  SELECT  E.ENAME ,M.ENAME "MANGER NAME" ,  MN.ENAME "MANGER'S MANAGER_NAME",
+  2  D.DNAME ,DM.DNAME "MANGER NAME" ,DMN.DNAME "MANGER'S MANAGER_NAME"
+  3  FROM EMP E,  EMP M,  EMP MN,  DEPT D,  DEPT DM,  DEPT DMN
+  4  WHERE E.MGR=M.EMPNO    AND                (Self join)
+  5  M.MGR=MN.EMPNO                AND                 (Self join)
+  6  E.DEPTNO=D.DEPTNO          AND	 (Inner join)
+  7  M.DEPTNO=DM.DEPTNO     AND                 (Inner join)
+  8  MN.DEPTNO=DMN.DEPTNO   AND           (Inner join)
+  9  E.SAL>1000                                          AND
+ 10  M.SAL>(SELECT SAL
+ 11  FROM EMP
+ 12  WHERE ENAME='ALLEN')          AND
+ 13* DMN.LOC  IN ('NEW YORK','CHICAGO')
+
+
+//output:-
+
+ENAME      MANGER NAM MANGER'S M DNAME          MANGER NAME    MANGER'S MA
+---------- ---------- ---------- -------------- -------------- -----------
+ALLEN      BLAKE      KING       SALES          SALES          ACCOUNTING
+WARD       BLAKE      KING       SALES          SALES          ACCOUNTING
+MARTIN     BLAKE      KING       SALES          SALES          ACCOUNTING
+SCOTT      JONES      KING       RESEARCH       RESEARCH       ACCOUNTING
+TURNER     BLAKE      KING       SALES          SALES          ACCOUNTING
+FORD       JONES      KING       RESEARCH       RESEARCH       ACCOUNTING
+MILLER     CLARK      KING       ACCOUNTING     ACCOUNTING     ACCOUNTING 
