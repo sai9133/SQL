@@ -1,0 +1,93 @@
+
+DDL :- DATA DEFINATION LANGUAGE.
+
+1)CREATION 2)RENAME 3)ALTER 4)DROP 5) TURNCATE
+
+
+1)wqtd print even place recoreds
+
+
+select *
+from (select rownum slno,emp.*
+from emp)
+where mod(slno,2)=0;
+
+ SLNO      EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO
+----- ---------- ---------- --------- ---------- --------- ---------- ---------- ----------
+    2       7499 ALLEN      SALESMAN        7698 20-FEB-81       1600        300         30
+    4       7566 JONES      MANAGER         7839 02-APR-81       2975                    20
+    6       7698 BLAKE      MANAGER         7839 01-MAY-81       2850                    30
+    8       7788 SCOTT      ANALYST         7566 19-APR-87       3000                    20
+   10       7844 TURNER     SALESMAN        7698 08-SEP-81       1500          0         30
+   12       7900 JAMES      CLERK           7698 03-DEC-81        950                    30
+   14       7934 MILLER     CLERK           7782 23-JAN-82       1300                    10
+ -------------------------------------------------------------------------------------------------------------
+2)wqtd print even place recoreds
+
+ select *
+ from (select rownum slno,emp.*
+ from emp)
+ where mod(slno,2)=1;
+ 
+
+  SLNO      EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO
+------ ---------- ---------- --------- ---------- --------- ---------- ---------- ----------
+     1       7369 SMITH      CLERK           7902 17-DEC-80        800                    20
+     3       7521 WARD       SALESMAN        7698 22-FEB-81       1250        500         30
+     5       7654 MARTIN     SALESMAN        7698 28-SEP-81       1250       1400         30
+     7       7782 CLARK      MANAGER         7839 09-JUN-81       2450                    10
+     9       7839 KING       PRESIDENT            17-NOV-81       5000                    10
+    11       7876 ADAMS      CLERK           7788 23-MAY-87       1100                    20
+    13       7902 FORD       ANALYST         7566 03-DEC-81       3000                    20
+-------------------------------------------------------------------------------------------------------------------------------
+3) nth maximum sal
+
+ select *
+ from (select rownum slno,sal
+ from (select distinct sal
+ from emp
+ order by sal desc))
+ where slno=5
+ 
+ ----------------------------------------------     or           --------------------------------------------------
+ select sal
+   from emp e1
+   where n-1=(select count(distinct s
+   from emp e2
+   where e2.sal>e1.sal);
+where n-1=(select count(distinct sal)
+
+Ex:- 
+  select sal
+ from emp e1
+ where 5-1=(select count(distinct sal)
+ from emp e2
+ where e2.sal>e1.sal)
+ 
+ -------------------------------------------------------------------------------------------------------------------  
+ 4) nth minimum sal
+ select *
+ from (select rownum slno,sal
+ from (select distinct sal
+ from emp
+ order by sal asc))
+ where slno=5;
+ 
+ -----------------------------------   or       -----------------------------------------------
+ select sal
+ from emp e1
+ where 5-1=(select count(distinct sal)
+ from emp e2
+ where e2.sal<e1.sal)
+ 
+ ---------------------------------------------------------------------------------------------------------------------- 
+ 5) 3rd and 4th maximum
+ 
+ select *
+ from (select rownum slno,sal
+ from (select distinct sal
+ from emp
+ order by sal desc))
+ where slno in (3,4);
+ 
+ -----------------------------------------------------
