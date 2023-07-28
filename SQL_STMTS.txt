@@ -1,0 +1,120 @@
+ create table hotel
+   (
+   Cid number(5) NOT NULL,
+   CNAME VARCHAR(30) NOT NULL,
+   CNUM NUMBER(30) NOT NULL,
+   CONSTRAINTS ID_PK PRIMARY KEY(cId)
+    )
+    ;
+
+Table created.
+
+SQL> dESC HOTEL;
+ Name                                   
+ ---------------------------------------
+ CID                                    
+ CNAME                                  
+ CNUM                                   
+ 
+--------------------------------------------------------------------------------- 
+ 2)RENAME :
+  RENAME HOTEL TO REST;
+
+   table renamed.
+   
+--------------------------------------------
+3)Alter :- this is statment is used to modify the object in database.
+   -> we can change column name,datatype,drop etc.
+   
+ 1)tO ADD cOLUMN
+ 
+  ALTER TABLE REST ADD GENDER VARCHAR(30) NOT NULL;
+
+2) tO DROP COL
+
+ALTER TABLE REST DROP COLUMN  GENDER
+
+3) CHANGE DATA TYPE
+ ALTER TABLE REST MODIFY GENDER NUMBER(29)
+ 
+ 4) TO CHANGE NOT NULL CONSTRAINTS
+  ALTER TABLE REST MODIFY GENDER NULL;
+  
+  5) HOW TO CHANGE CONSTARINTS IN TABLE
+  -> 1)ALTER TABLE REST MODIFY (CNUM NULL);   // FIRST MODIFY TO NULL
+     2) ALTER TABLE REST ADD CONSTRAINT SAI UNIQUE(CNUM);
+
+  -------------------------------------------------------------------
+  3) TURNCATE:-
+    IT IS USED TO DELETE ALL RECORED PERMANTELY.
+	
+	SYNTAX:-
+	TURNCATE TABLE REST
+	
+-------------------------------------------------------------------------	---------------
+4) DROP :-
+WE CAN RESTORE DATA
+
+SYNTAX:-
+DROP TABLE REST
+  
+  ---------------------------------------------------------------------------------------------------------------------------------------------
+  2)DML :-DATA MANUPULATION LANGUAGE.
+  1)INSERT 2)UPDATE 3)DELETE
+  
+  INSERT:INSERT INTO REST VALUES (1,'SAI','MALE',9133188774);
+   SELECT *
+  2  FROM REST;
+
+       CID CNAME                          GENDER                               CNUM
+---------- ------------------------------ ------------------------------ ----------
+         1 SAI                              MALE                           9133188774
+         2 BHAVYA                         FEMALE                             123455
+         3 LUCKY                          FEMALE                               3456
+  
+  -----------------------------------------------------------------------
+  2)UPDATE :-
+  SQL> UPDATE REST
+  2  SET CNAME='SAI NAGENDRA'
+  3  WHERE CID=1;
+
+1 row updated.
+
+COMMIT;
+
+Commit complete.
+
+SQL> SELECT *
+  2  FROM REST;
+
+       CID CNAME                          GENDER                               CNUM
+---------- ------------------------------ ------------------------------ ----------
+         1 SAI NAGENDRA                   MALE                           9133188774 (SAI TO SAI NAGENDRA)
+         2 BHAVYA                         FEMALE                             123455
+         3 LUCKY                          FEMALE                               3456
+  -------------------------------------------------------------------------------------------------------------------------------
+  3) DELETE
+  
+  NOTE :- "IN DELETE NO NEED TO WRITE FROM CLAUSE)
+ DELETE REST
+ WHERE CID=2;
+
+  ROw deleted.
+
+ SELECT *
+ FROM REST;
+
+   CID CNAME                          GENDER                               CNUM
+------ ------------------------------ ------------------------------ ----------
+     1 SAI NAGENDRA                   MALE                           9133188774
+     3 LUCKY                          FEMALE                               3456
+
+
+---------------------------------------------------------------------------------------------------------------------------------------
+TCL ;- TEANSACTION CONTROL LANGUAGE
+1)COMMIT 2) SAVEPOINT 3)ROLLBACK
+
+---------------------------------------------------
+DCL :- DATA CONTROLL LANGUAGE
+1) GRANT 2) REVOKE
+-----------------------------------------------------
